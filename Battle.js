@@ -117,8 +117,199 @@ const firing = (e) =>{
 
 
 const makeShip = (start,direc) =>{
-     console.log(start.dataset.x);
-     console.log(direc);
+    const placement = document.querySelector('.placement');
+    const player = document.querySelector('.container')
+
+     if(totalShipPlacement === 17){
+    
+          if(direc === 'left'){
+
+            totalShipPlacement = 12;
+            for(let i = 0; i < 5; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x)  - i,
+                    y: parseInt(start.y)
+                })
+      
+                showShips(parseInt(start.x) - i , parseInt(start.y))
+            }
+          }
+          else if(direc === 'right'){
+            totalShipPlacement = 12;
+            for(let i = 0; i < 5; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) + i,
+                    y: parseInt(start.y) 
+                })
+      
+                showShips(parseInt(start.x) + i  , parseInt(start.y) )
+            }
+          }
+          else if(direc ==='up'){
+            totalShipPlacement = 12;
+            for(let i = 0; i < 5; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) ,
+                    y: parseInt(start.y) - i
+                })
+      
+                showShips(parseInt(start.x)  , parseInt(start.y) - i)
+            }
+         
+        }
+
+          
+          else if(direc ==='down'){
+            totalShipPlacement = 12;
+              for(let i = 0; i < 5; i++){
+
+                  storeShips.push({
+                      x: parseInt(start.x) ,
+                      y: parseInt(start.y) + i
+                  })
+        
+                  showShips(parseInt(start.x)  , parseInt(start.y) +i)
+              }
+           
+          }
+          while(placement.lastElementChild){
+              placement.removeChild(placement.lastElementChild);
+          }
+          
+     
+     } 
+     else if(totalShipPlacement === 12){
+
+      
+         if(direc === 'left'){
+
+         }
+         else if(direc === 'right'){
+
+         }
+         else if(direc ==='up'){
+
+         }
+         else if(direc ==='down'){
+      
+             for(let i = 0; i < 4; i++){
+
+                 storeShips.push({
+                     x: parseInt(start.x) ,
+                     y: parseInt(start.y)+i
+                 })
+       
+                 showShips(parseInt(start.x)  , parseInt(start.y) +i)
+             }
+             totalShipPlacement  = 8;
+         }
+         while(placement.lastElementChild){
+            placement.removeChild(placement.lastElementChild);
+        }
+        return true
+   
+    }  
+     else if(totalShipPlacement === 8){
+
+      
+         if(direc === 'left'){
+
+         }
+         else if(direc === 'right'){
+
+         }
+         else if(direc ==='up'){
+             
+
+         }
+         else if(direc ==='down'){
+      
+             for(let i = 0; i < 3; i++){
+
+                 storeShips.push({
+                     x: parseInt(start.x) ,
+                     y: parseInt(start.y)+i
+                 })
+       
+                 showShips(parseInt(start.x)  , parseInt(start.y) +i)
+             }
+             totalShipPlacement  = 5;
+         }
+         while(placement.lastElementChild){
+            placement.removeChild(placement.lastElementChild);
+        }
+        return true
+   
+    }  
+    else if(totalShipPlacement === 5){
+
+      
+         if(direc === 'left'){
+
+         }
+         else if(direc === 'right'){
+
+         }
+         else if(direc ==='up'){
+
+         }
+         else if(direc ==='down'){
+      
+             for(let i = 0; i < 3; i++){
+
+                 storeShips.push({
+                     x: parseInt(start.x) ,
+                     y: parseInt(start.y)+i
+                 })
+       
+                 showShips(parseInt(start.x)  , parseInt(start.y) +i)
+             }
+             totalShipPlacement  = 2;
+         }
+         while(placement.lastElementChild){
+            placement.removeChild(placement.lastElementChild);
+        }
+        return true
+   
+    }
+    else if(totalShipPlacement === 2){
+
+      
+         if(direc === 'left'){
+
+         }
+         else if(direc === 'right'){
+
+         }
+         else if(direc ==='up'){
+
+         }
+         else if(direc ==='down'){
+      
+             for(let i = 0; i < 2; i++){
+
+                 storeShips.push({
+                     x: parseInt(start.x) ,
+                     y: parseInt(start.y)+i
+                 })
+       
+                 showShips(parseInt(start.x)  , parseInt(start.y) +i)
+             }
+             totalShipPlacement  = 0;
+         }
+         while(placement.lastElementChild){
+            placement.removeChild(placement.lastElementChild);
+        }
+        return true
+   
+    }
+    else{
+        placement.setAttribute('disabled')
+    }
+   
 }
 
 // see if the cords selected is where a computer ship is and send back something
@@ -137,12 +328,29 @@ const determineHit = (hitX,hitY) =>{
     }
 }
 
+const showShips = (cordsX, cordsY) =>{
+    const player = document.querySelectorAll('.container span')
+
+  
+        for(let j = 0; j< player.length ; j++){
+            if((parseInt(player[j].dataset.x )=== parseInt(cordsX)) && (parseInt(player[j].dataset.y) === parseInt(cordsY))){
+                player[j].classList.add('ship')
+              return true
+            }
+        }
+       
+    
+}
+
+const checkShip = () =>{
+    
+}
+
 
 //  make sure where the user icks at square it makes sure it a right sqaure
 const placeShip = (e) =>{
-    const start = e.target
-    console.log(e.target.dataset);
-   
+    const start = e.target.dataset;
+
     const place = document.querySelector('.placement')
     // place in seperate function
     const up = document.createElement('button')
@@ -155,6 +363,9 @@ const placeShip = (e) =>{
     const textLeft = document.createTextNode('left')
     const textRight = document.createTextNode('right')
     up.setAttribute('data-direc' , 'up')
+    down.setAttribute('data-direc' , 'down')
+    left.setAttribute('data-direc' , 'left')
+    right.setAttribute('data-direc' , 'right')
     
 
     up.appendChild(textUp)
@@ -165,24 +376,24 @@ const placeShip = (e) =>{
 
 // ----------------
 
-   while(true){
+ 
     //    place 5 square represent carrier 
         if(totalShipPlacement ===  17){
-           if(e.target.dataset.y - 5 >= 0 ){
+           if(parseInt(e.target.dataset.y) - 5 >= 0  ){
                
                place.appendChild(up)
                
            }
 
-            if(e.target.dataset.y + 5 <= 10 ){
-               
+            if(parseInt(e.target.dataset.y) + 5 <= 10 ){
+              
                 place.appendChild(down)
                 
             }
  
          
        
-            if(e.target.dataset.x - 5 >= 0 ){
+            if(parseInt(e.target.dataset.x) - 5 >= 0 ){
                 
                 place.appendChild(left)
                 
@@ -190,7 +401,7 @@ const placeShip = (e) =>{
  
          
   
-            if(e.target.dataset.x + 5 <= 10 ){
+            if(parseInt(e.target.dataset.x ) + 5 <= 10 ){
                
                 place.appendChild(right)
                
@@ -202,29 +413,161 @@ const placeShip = (e) =>{
                 makeShip(start,direc.dataset.direc)
             }, false))
  
-            break;
+       
         }
         // place 4 square represent battleship
         else if(totalShipPlacement === 12 ){
-
+            if(e.target.dataset.y - 4 >= 0 ){
+               
+                place.appendChild(up)
+                
+            }
+ 
+             if(parseInt(e.target.dataset.y) + 4 <= 10 ){
+               
+                 place.appendChild(down)
+                 
+             }
+  
+          
+        
+             if(e.target.dataset.x - 4 >= 0 ){
+                 
+                 place.appendChild(left)
+                 
+             }
+  
+          
+   
+             if(e.target.dataset.x + 4 <= 10 ){
+                
+                 place.appendChild(right)
+                
+             }
+             const direction = document.querySelectorAll('.placement button')
+            
+             direction.forEach(direc => direc.addEventListener('click',function(){
+               
+                 makeShip(start,direc.dataset.direc)
+             }, false))
+  
+           
         }
          // place 3 square represent battleship
         else if(totalShipPlacement === 8 ){
-
+            if(e.target.dataset.y - 3 >= 0 ){
+               
+                place.appendChild(up)
+                
+            }
+ 
+             if(parseInt(e.target.dataset.y) + 3 <= 10 ){
+               
+                 place.appendChild(down)
+                 
+             }
+  
+          
+        
+             if(e.target.dataset.x -3 >= 0 ){
+                 
+                 place.appendChild(left)
+                 
+             }
+  
+          
+   
+             if(e.target.dataset.x + 3 <= 10 ){
+                
+                 place.appendChild(right)
+                
+             }
+             const direction = document.querySelectorAll('.placement button')
+            
+             direction.forEach(direc => direc.addEventListener('click',function(){
+               
+                 makeShip(start,direc.dataset.direc)
+             }, false))
+  
+           
         }
         // place 3 more
         else if(totalShipPlacement ===5){
-
+            if(e.target.dataset.y - 3 >= 0 ){
+               
+                place.appendChild(up)
+                
+            }
+ 
+             if(parseInt(e.target.dataset.y) + 3 <= 10 ){
+               
+                 place.appendChild(down)
+                 
+             }
+  
+          
+        
+             if(e.target.dataset.x - 3 >= 0 ){
+                 
+                 place.appendChild(left)
+                 
+             }
+  
+          
+   
+             if(e.target.dataset.x + 3 <= 10 ){
+                
+                 place.appendChild(right)
+                
+             }
+             const direction = document.querySelectorAll('.placement button')
+            
+             direction.forEach(direc => direc.addEventListener('click',function(){
+               
+                 makeShip(start,direc.dataset.direc)
+             }, false))
+  
+          
         }
         // place 2
         else if(totalShipPlacement ===  2 ){
-
-        }
+            if(e.target.dataset.y - 2 >= 0 ){
+               
+                place.appendChild(up)
+                
+            }
+ 
+             if(parseInt(e.target.dataset.y) + 2 <= 10 ){
+               
+                 place.appendChild(down)
+                 
+             }
+  
+          
         
-        else{
-            break;
+             if(e.target.dataset.x - 2 >= 0 ){
+                 
+                 place.appendChild(left)
+                 
+             }
+  
+          
+   
+             if(e.target.dataset.x + 2 <= 10 ){
+                
+                 place.appendChild(right)
+                
+             }
+             const direction = document.querySelectorAll('.placement button')
+            
+             direction.forEach(direc => direc.addEventListener('click',function(){
+               
+                 makeShip(start,direc.dataset.direc)
+             }, false))
+  
+            
         }
-   }
+        console.log(totalShipPlacement)
     
 }
 
