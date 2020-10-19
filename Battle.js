@@ -10,19 +10,9 @@ let computerHits = [];
 
 
  // represent the amount of sqare it will take up
-let totalShipPlacement = 17
+let totalShipPlacement = 17;
+let totalComputerShip = 0;
 
-// test placemnt
-computerShips.push({
-    x: 0,
-    y: 0
-})
-
-computerShips.push({
-    x: 7,
-    y: 6
-})
-// test placement
 
 
 const create2D = () =>{
@@ -113,16 +103,17 @@ const firing = (e) =>{
     }
     
     // 
+    computerCallShot();
 }
 
 
 const makeShip = (start,direc) =>{
     const placement = document.querySelector('.placement');
-    const player = document.querySelector('.container')
+
 
      if(totalShipPlacement === 17){
     
-          if(direc === 'left'){
+          if(direc === 'left' ){
 
             totalShipPlacement = 12;
             for(let i = 0; i < 5; i++){
@@ -185,12 +176,42 @@ const makeShip = (start,direc) =>{
 
       
          if(direc === 'left'){
+            totalShipPlacement = 8;
+            for(let i = 0; i < 4; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x)  - i,
+                    y: parseInt(start.y)
+                })
+      
+                showShips(parseInt(start.x) - i  , parseInt(start.y) )
+            }
 
          }
          else if(direc === 'right'){
+            totalShipPlacement = 8;
+            for(let i = 0; i < 4; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) + i,
+                    y: parseInt(start.y) 
+                })
+      
+                showShips(parseInt(start.x) + i , parseInt(start.y) )
+            }
 
          }
          else if(direc ==='up'){
+            totalShipPlacement = 8;
+            for(let i = 0; i < 4; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) ,
+                    y: parseInt(start.y) - i
+                })
+      
+                showShips(parseInt(start.x)  , parseInt(start.y) - i)
+            }
 
          }
          else if(direc ==='down'){
@@ -216,12 +237,42 @@ const makeShip = (start,direc) =>{
 
       
          if(direc === 'left'){
+            for(let i = 0; i < 3; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) - i,
+                    y: parseInt(start.y)
+                })
+      
+                showShips(parseInt(start.x) - i , parseInt(start.y) )
+            }
+            totalShipPlacement  = 5;
 
          }
          else if(direc === 'right'){
+            for(let i = 0; i < 3; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x)  + i,
+                    y: parseInt(start.y)
+                })
+      
+                showShips(parseInt(start.x) + i , parseInt(start.y) )
+            }
+            totalShipPlacement  = 5;
 
          }
          else if(direc ==='up'){
+            for(let i = 0; i < 3; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) ,
+                    y: parseInt(start.y)-i
+                })
+      
+                showShips(parseInt(start.x)  , parseInt(start.y) - i)
+            }
+            totalShipPlacement  = 5;
              
 
          }
@@ -248,13 +299,43 @@ const makeShip = (start,direc) =>{
 
       
          if(direc === 'left'){
+            for(let i = 0; i < 3; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) - i,
+                    y: parseInt(start.y)
+                })
+      
+                showShips(parseInt(start.x) - i , parseInt(start.y) )
+            }
+            totalShipPlacement  = 2;
 
          }
          else if(direc === 'right'){
+            for(let i = 0; i < 3; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x)  + i,
+                    y: parseInt(start.y)
+                })
+      
+                showShips(parseInt(start.x) + i , parseInt(start.y) )
+            }
+            totalShipPlacement  = 2;
 
          }
          else if(direc ==='up'){
 
+            for(let i = 0; i < 3; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) ,
+                    y: parseInt(start.y)-i
+                })
+      
+                showShips(parseInt(start.x)  , parseInt(start.y) - i)
+            }
+            totalShipPlacement  = 2;
          }
          else if(direc ==='down'){
       
@@ -280,12 +361,42 @@ const makeShip = (start,direc) =>{
       
          if(direc === 'left'){
 
+            for(let i = 0; i < 2; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) -i  ,
+                    y: parseInt(start.y)
+                })
+      
+                showShips(parseInt(start.x) -i  , parseInt(start.y) )
+            }
+            totalShipPlacement  = 0;
+
          }
          else if(direc === 'right'){
+            for(let i = 0; i < 2; i++){
+
+                storeShips.push({
+                    x: parseInt(start.x) +i  ,
+                    y: parseInt(start.y)
+                })
+      
+                showShips(parseInt(start.x) +i  , parseInt(start.y) )
+            }
+            totalShipPlacement  = 0;
 
          }
          else if(direc ==='up'){
+            for(let i = 0; i < 2; i++){
 
+                storeShips.push({
+                    x: parseInt(start.x)  ,
+                    y: parseInt(start.y) - i
+                })
+      
+                showShips(parseInt(start.x)   , parseInt(start.y) - i )
+            }
+            totalShipPlacement  = 0;
          }
          else if(direc ==='down'){
       
@@ -342,9 +453,39 @@ const showShips = (cordsX, cordsY) =>{
     
 }
 
-const checkShip = () =>{
-    
-}
+
+    // check if there is a ship there before hand
+    // goes through stored ships return false if they can't find a store ship with 
+    // else it will return true if they can find the store ship
+    // should go in all direction of the start base on total ship placement
+    // future iteration
+    const checkShip = (e) =>{
+
+        if(totalShipPlacement === 17){
+            // there is nothing in the storeShips varible to check agisnt it
+            return false;
+
+        }
+        else if (totalShipPlacement === 12 ){
+//  go in all direction + 5 to see if there 
+// use x and y dataset which is the 
+            //  do for loops for each direction 
+            for(let i = 0; i < storeShips.length;i++){
+                
+            } 
+        }
+        else if (totalShipPlacement === 8 ){
+            
+        }
+        else if (totalShipPlacement === 5 ){
+            
+        }
+        else if (totalShipPlacement === 2){
+            
+        }
+        
+    }
+
 
 
 //  make sure where the user icks at square it makes sure it a right sqaure
@@ -380,10 +521,12 @@ const placeShip = (e) =>{
     //    place 5 square represent carrier 
         if(totalShipPlacement ===  17){
            if(parseInt(e.target.dataset.y) - 5 >= 0  ){
+        
+                place.appendChild(up)
+               }
+             
                
-               place.appendChild(up)
-               
-           }
+           
 
             if(parseInt(e.target.dataset.y) + 5 <= 10 ){
               
@@ -570,10 +713,74 @@ const placeShip = (e) =>{
         console.log(totalShipPlacement)
     
 }
+const getRandomLocation =(max) =>{
+    return Math.floor(Math.random()*Math.floor(max))
+}
 
+const makeComputerShips = () =>{
+    let currrentMax = 5;
+    if(totalComputerShip === 0){
+        currrentMax = 5;
+        totalComputerShip = 5
+    }
+    else if(totalComputerShip === 5){
+        currrentMax = 4;
+        totalComputerShip = 9;
+    }
+    else if(totalComputerShip === 9 ){
+        currrentMax = 3;
+        totalComputerShip = 12;
+    }
+    else if(totalComputerShip === 12){
+        totalComputerShip = 15;
+    }
+    else if(totalComputerShip === 15){
+        currrentMax = 2;
+        totalComputerShip = 17;
+    }
+    else if(totalComputerShip === 17){
+       return true;
+    }
+    // this will make computer ships and will be stored in  the store computer ships cords
+    let xCord = getRandomLocation(10);
+    let yCord = getRandomLocation(10);
+    console.log(xCord)
+    console.log(yCord)
+    // check if there is a ship in that direction
+    for(let i = 0; i < computerShips.length;i++){
+        if( (cordsX + currrentMax === computerShips[i].x)  && (cordsY) === computerShips[i].y){
 
+        }
+       else if(i === computerShips.length - 1 ){
+        computerShips.push({
+            x: xCord,
+            y: yCord
+        })
+       }
+    }
+
+}
+//  this will call a computer shots and make sure the the shots called aren't shots already called
+
+const computerCallShot = () =>{ 
+    let xCord = getRandomLocation(10);
+    let yCord = getRandomLocation(10);
+    let computerShot =({
+        x:xCord,
+        y:yCord
+    })
+    return computerShot
+}
 
 //  adds all the eventlister to the quare 
+
+
+if(totalShipPlacement  === 0){
+    while(totalComputerShip != 17){
+        makeComputerShips()
+    }
+   
+}
 
 const make = document.querySelectorAll('.container span');
 
@@ -600,7 +807,7 @@ fire.forEach(box => box.addEventListener('click', firing));
 
 //TODO: 
 // 1. Determine wheather something is a hit or miss DONE
-// 2. find way to see that the ships is in a straigt line 90 degree
+// 2. find way to see that the ships is in a straigt line 90 degree DONE FOR NOW
 // 2a. maybe store where the start the ship
 // 2b. both cord shouldn't change only one of the cords should change x or y not both
 // 2c . make a button to place  the ship according to the rules
@@ -608,5 +815,8 @@ fire.forEach(box => box.addEventListener('click', firing));
 // 3. Get computer generate ships with the right rules so only one cords should increese 
 // both should not increse both
 // 4. Get computer to hit a random location and not hit the same location
-// 5. determine the ship sizes: 5,4,3,3,2,
+// 5. determine the ship sizes: 5,4,3,3,2, DONE
 
+// TODO: 
+// future edition
+// make sure the player shipp locatins don't overlap  each other
